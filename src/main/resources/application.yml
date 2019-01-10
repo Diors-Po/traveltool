@@ -30,7 +30,7 @@ spring:
   application:
     name: traveltool
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/travel?useUnicode=yes&characterEncoding=UTF-8
     username: root
     password: Aesh8kie#j
