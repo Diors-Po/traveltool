@@ -18,11 +18,11 @@ public class UserController {
     @Autowired
     private UserService userService;
     @PostMapping("login")
-    public ReponseMessage login(@RequestBody UserVO userVO) throws Exception {
+    public ReponseMessage login(@RequestBody UserVO userVO) {
         return userService.login(userVO);
     }
     @PostMapping("register")
-    public ReponseMessage register(@RequestBody UserVO userVO) throws Exception {
+    public ReponseMessage register(@RequestBody UserVO userVO) {
         return userService.register(userVO);
     }
 }
