@@ -1,5 +1,6 @@
 package cn.edu.nju.traveltool.data;
 
+import cn.edu.nju.traveltool.constant.Constant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,10 @@ public class ReponseMessage<T> {
     private String msg;
     private T data;
 
+    public static final ReponseMessage OK = new ReponseMessage(Constant.OK,Constant.REQUEST_SUCCESS);
 
+    public ReponseMessage(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
 }
