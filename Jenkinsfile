@@ -21,6 +21,12 @@ pipeline {
 
         }
 
+        stage('sonar') {
+             steps{
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://118.31.34.71:10000 -Dsonar.login=70c4dade08b1f1e3fe4f9e275d1f95990953fcba'
+             }
+        }
+
         stage('docker') {
             steps {
                 sh 'docker stop traveltool'
