@@ -20,3 +20,25 @@ spring:
     open-in-view: false
 server:
   port: 9102
+
+
+---
+## test
+
+spring:
+  profiles: test
+  application:
+    name: traveltool
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/travel?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: Aesh8kie#j
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+server:
+  port: 9997

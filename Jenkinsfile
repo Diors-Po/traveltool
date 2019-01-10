@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('prepare') {
             steps {
-                git credentialsId: 'github', url: 'https://github.com/DmuMenDuo/campusqa'
+                git credentialsId: 'github', url: 'https://github.com/DmuMenDuo/traveltool'
             }
         }
         stage('build') {
@@ -23,17 +23,17 @@ pipeline {
 
         stage('docker') {
             steps {
-                sh 'docker stop campusqa'
-                sh 'docker rm -f campusqa'
-                sh 'docker rmi $(docker images --filter=reference="campusqa" -q)'
-                sh 'docker build -t campusqa .'
+                sh 'docker stop traveltool'
+                sh 'docker rm -f traveltool'
+                sh 'docker rmi $(docker images --filter=reference="traveltool" -q)'
+                sh 'docker build -t traveltool .'
             }
         }
 
         stage('run') {
             steps{
 
-                sh 'docker run --name=campusqa -itd -p 9997:9997 campusqa  --spring.profiles.active=test'
+                sh 'docker run --name=traveltool -itd -p 9997:9997 traveltool  --spring.profiles.active=test'
             }
         }
 
