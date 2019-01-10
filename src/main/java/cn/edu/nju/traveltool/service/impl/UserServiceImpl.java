@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserWrapper userWrapper;
     @Override
-    public ReponseMessage login(UserVO userVO) throws UserException {
+    public ReponseMessage login(UserVO userVO) {
         User u = userWrapper.unwrapper(userVO);
         u = userRepository.findByEmailAndPwd(u.getEmail(),u.getPwd());
         if (u==null)
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ReponseMessage register(UserVO userVO) throws UserException {
+    public ReponseMessage register(UserVO userVO) {
         User u = userWrapper.unwrapper(userVO);
         if(userRepository.findByEmail(u.getEmail())!=null)
             throw new UserHasPresenceException();
