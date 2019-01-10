@@ -14,7 +14,7 @@ public class Constant {
     public static final String REQUEST_FAIL = "请求失败";
 
     public static final String USER_LOGIN_FAIL = "用户登录失败";
-    public static final String USER_PWD_ERROR = "用户密码错误";
+    public static final String USER_LOGIN_ERROR = "用户密码错误";
     public static final String USER_HAS_PRESENCE = "用户已存在";
     public static final String USER_REGISTER_FAIL = "用户注册失败";
 

@@ -28,7 +28,7 @@ public class ExceptionAdvice {
         }else if(e instanceof RegisterException){
             return new ReponseMessage(500,Constant.USER_REGISTER_FAIL);
         }else if(e instanceof PwdErrorException){
-            return new ReponseMessage(400,Constant.USER_PWD_ERROR);
+            return new ReponseMessage(400,Constant.USER_LOGIN_ERROR);
         }else{
             return new ReponseMessage(400,Constant.USER_LOGIN_FAIL);
         }
