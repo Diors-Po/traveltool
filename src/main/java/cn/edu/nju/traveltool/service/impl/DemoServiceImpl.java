@@ -1,6 +1,7 @@
 package cn.edu.nju.traveltool.service.impl;
 
 import cn.edu.nju.traveltool.service.DemoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,9 +11,10 @@ import org.springframework.stereotype.Service;
  * @create: 2019-01-10 10:38
  **/
 @Service
+@Slf4j
 public class DemoServiceImpl implements DemoService {
     @Override
     public void hello() {
-        System.out.println("hello");
+        log.info("hello");
     }
 }

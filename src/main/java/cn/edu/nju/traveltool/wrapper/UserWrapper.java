@@ -18,6 +18,7 @@ public class UserWrapper {
     public User unwrapper(UserVO userVO){
         User u = new User();
         BeanUtils.copyProperties(userVO,u);
+        u.setNickname(userVO.getUser());
         u.setPwd(DigestUtils.md5DigestAsHex(u.getPwd().getBytes())); //md5密码
         return u;
     }

@@ -21,5 +21,5 @@ public class User extends BaseEntity{
     @Column(name = "pwd")
     private String pwd;
     @Column(name = "user")
-    private String user;
+    private String nickname;
 }

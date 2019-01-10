@@ -17,4 +17,8 @@ public class Constant {
     public static final String USER_PWD_ERROR = "用户密码错误";
     public static final String USER_HAS_PRESENCE = "用户已存在";
     public static final String USER_REGISTER_FAIL = "用户注册失败";
+
+    private Constant() {
+        throw new IllegalStateException("Utility class");
+    }
 }

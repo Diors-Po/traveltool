@@ -1,5 +1,6 @@
 package cn.edu.nju.traveltool.service;
 
+import cn.edu.nju.traveltool.controller.exception.UserException;
 import cn.edu.nju.traveltool.controller.vo.UserVO;
 import cn.edu.nju.traveltool.data.ReponseMessage;
 
@@ -10,6 +11,6 @@ import cn.edu.nju.traveltool.data.ReponseMessage;
  * @create: 2019-01-10 22:45
  **/
 public interface UserService {
-    ReponseMessage login(UserVO userVO) throws Exception;
-    ReponseMessage register(UserVO userVO) throws Exception;
+    ReponseMessage login(UserVO userVO) throws UserException;
+    ReponseMessage register(UserVO userVO) throws UserException;
 }
