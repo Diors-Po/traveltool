@@ -23,4 +23,12 @@ public class UserWrapper {
         return u;
     }
 
+    public UserVO wrapper(User user){
+        UserVO u = new UserVO();
+        BeanUtils.copyProperties(user,u);
+        u.setPwd("******");
+        u.setUser(user.getNickname());
+        return u;
+    }
+
 }

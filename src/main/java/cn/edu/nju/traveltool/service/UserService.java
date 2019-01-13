@@ -2,6 +2,9 @@ package cn.edu.nju.traveltool.service;
 
 import cn.edu.nju.traveltool.controller.vo.UserVO;
 import cn.edu.nju.traveltool.data.ReponseMessage;
+import cn.edu.nju.traveltool.entity.User;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @program: traveltool
@@ -10,6 +13,7 @@ import cn.edu.nju.traveltool.data.ReponseMessage;
  * @create: 2019-01-10 22:45
  **/
 public interface UserService {
-    ReponseMessage login(UserVO userVO);
-    ReponseMessage register(UserVO userVO);
+    ReponseMessage<UserVO> login(UserVO userVO, HttpSession httpSession);
+    ReponseMessage<UserVO> register(UserVO userVO, HttpSession httpSession);
+    ReponseMessage<UserVO> info(User user);
 }
