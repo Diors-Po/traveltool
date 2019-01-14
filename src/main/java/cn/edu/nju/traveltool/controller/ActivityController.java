@@ -11,9 +11,12 @@ import cn.edu.nju.traveltool.data.ReponseMessage;
 import cn.edu.nju.traveltool.entity.ActivityWithUser;
 import cn.edu.nju.traveltool.entity.User;
 import cn.edu.nju.traveltool.service.ActivityService;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @program: traveltool
@@ -27,9 +30,20 @@ import org.springframework.web.bind.annotation.*;
 public class ActivityController {
     @Autowired
     private ActivityService activityService;
-    @GetMapping("list/{page}/{size}")
-    public ReponseMessage<Page<ActivityWithUserVO>> list(@CurrentUser User user, @PathVariable("page")int page, @PathVariable("size")int size){
-        Page<ActivityWithUserVO>  activityVOPage = activityService.listActivity(page, size,user);
+    @GetMapping("list")
+    public ReponseMessage<List<ActivityWithUserVO>> list(@CurrentUser User user){
+        List<ActivityWithUserVO> activityVOPage = activityService.listActivity(user);
+        return new ReponseMessage<>(Constant.OK,Constant.REQUEST_SUCCESS,activityVOPage);
+    }
+
+    @GetMapping("list/owner")
+    public ReponseMessage<List<ActivityWithUserVO>> owner(@CurrentUser User user){
+        List<ActivityWithUserVO>  activityVOPage = activityService.listActivity(user, ActivityWithUser.Status.OWNER);
+        return new ReponseMessage<>(Constant.OK,Constant.REQUEST_SUCCESS,activityVOPage);
+    }
+    @GetMapping("list/member")
+    public ReponseMessage<List<ActivityWithUserVO>> member(@CurrentUser User user){
+        List<ActivityWithUserVO>  activityVOPage = activityService.listActivity(user, Lists.newArrayList(ActivityWithUser.Status.MEMBER, ActivityWithUser.Status.PREMEMBER, ActivityWithUser.Status.UNMEMBER));
         return new ReponseMessage<>(Constant.OK,Constant.REQUEST_SUCCESS,activityVOPage);
     }
 

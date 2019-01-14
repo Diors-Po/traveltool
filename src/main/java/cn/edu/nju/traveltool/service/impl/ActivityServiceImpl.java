@@ -3,7 +3,6 @@ package cn.edu.nju.traveltool.service.impl;
 import cn.edu.nju.traveltool.controller.vo.*;
 import cn.edu.nju.traveltool.entity.Activity;
 import cn.edu.nju.traveltool.entity.ActivityWithUser;
-import cn.edu.nju.traveltool.entity.Notice;
 import cn.edu.nju.traveltool.entity.User;
 import cn.edu.nju.traveltool.repository.ActivityRespository;
 import cn.edu.nju.traveltool.repository.ActivityWithUserRepository;
@@ -16,9 +15,6 @@ import cn.edu.nju.traveltool.wrapper.NoticeWrapper;
 import cn.edu.nju.traveltool.wrapper.UserWrapper;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,11 +64,21 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public Page<ActivityWithUserVO> listActivity(int page, int size, User user) {
-        Pageable pageable = PageRequest.of(page,size,new Sort(Sort.Direction.DESC,"id"));
-        Page<ActivityWithUser> activityWithUsers = activityWithUserRepository.findAllByUserId(user.getId(),pageable);
-        Page<ActivityWithUserVO>  activityWithUserVOS = activityWithUsers.map(x -> activityWithUserWrapper.wrapper(x,user));
+    public List<ActivityWithUserVO> listActivity(User user) {
+
+        List<ActivityWithUser> activityWithUsers = activityWithUserRepository.findAllByUserId(user.getId(),new Sort(Sort.Direction.DESC,"id"));
+        List<ActivityWithUserVO>  activityWithUserVOS = activityWithUsers.stream().map(x -> activityWithUserWrapper.wrapper(x,user)).collect(Collectors.toList());
         return activityWithUserVOS;
+    }
+
+    @Override
+    public List<ActivityWithUserVO> listActivity(User user, ActivityWithUser.Status status) {
+        return listActivity(user).stream().filter(x -> x.getStatus() == status).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ActivityWithUserVO> listActivity(User user, List<ActivityWithUser.Status> status) {
+        return listActivity(user).stream().filter(x -> status.contains(x.getStatus())).collect(Collectors.toList());
     }
 
     @Override
