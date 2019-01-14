@@ -36,7 +36,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             LoginRequired loginRequired = handlerMethod.getMethod().getAnnotation(LoginRequired.class);
             if(loginRequired==null){
-                loginRequired = handlerMethod.getClass().getAnnotation(LoginRequired.class);
+                loginRequired = handlerMethod.getBeanType().getAnnotation(LoginRequired.class);
             }
             //需要验证session是否有相应的权限
             if(loginRequired!=null){

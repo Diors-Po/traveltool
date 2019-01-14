@@ -1,9 +1,13 @@
 package cn.edu.nju.traveltool.wrapper;
 
+import cn.edu.nju.traveltool.controller.vo.ActivityListVO;
 import cn.edu.nju.traveltool.controller.vo.ActivityVO;
+import cn.edu.nju.traveltool.controller.vo.UserVO;
 import cn.edu.nju.traveltool.entity.Activity;
 import cn.edu.nju.traveltool.entity.ActivityWithUser;
+import cn.edu.nju.traveltool.entity.User;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +19,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ActivityWrapper {
 
+    @Autowired
+    private ActivityWithUserWrapper activityWithUserWrapper;
+    @Autowired
+    private UserWrapper userWrapper;
     public Activity unwrapper(ActivityVO activityVO) {
         Activity activity = new Activity();
         BeanUtils.copyProperties(activityVO,activity);
@@ -26,7 +34,4 @@ public class ActivityWrapper {
         BeanUtils.copyProperties(activity,activityVO);
         return activityVO;
     }
-
-
-
 }

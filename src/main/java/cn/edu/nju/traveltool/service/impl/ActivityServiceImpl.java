@@ -1,9 +1,12 @@
 package cn.edu.nju.traveltool.service.impl;
 
+import cn.edu.nju.traveltool.controller.vo.ActivityListVO;
 import cn.edu.nju.traveltool.controller.vo.ActivityVO;
+import cn.edu.nju.traveltool.controller.vo.ActivityWithUserVO;
 import cn.edu.nju.traveltool.controller.vo.JoinActivityVO;
 import cn.edu.nju.traveltool.entity.Activity;
 import cn.edu.nju.traveltool.entity.ActivityWithUser;
+import cn.edu.nju.traveltool.entity.User;
 import cn.edu.nju.traveltool.repository.ActivityRespository;
 import cn.edu.nju.traveltool.repository.ActivityWithUserRepository;
 import cn.edu.nju.traveltool.service.ActivityService;
@@ -54,10 +57,11 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public Page<ActivityVO> listActivity(int page,int size) {
+    public Page<ActivityWithUserVO> listActivity(int page, int size, User user) {
         Pageable pageable = PageRequest.of(page,size,new Sort(Sort.Direction.DESC,"id"));
-        Page<Activity> activities = activityRespository.findByClosed(0,pageable);
-        return activities.map(x -> activityWrapper.wrapper(x));
+        Page<ActivityWithUser> activityWithUsers = activityWithUserRepository.findAllByUserId(user.getId(),pageable);
+        Page<ActivityWithUserVO>  activityWithUserVOS = activityWithUsers.map(x -> activityWithUserWrapper.wrapper(x,user));
+        return activityWithUserVOS;
     }
 
     @Override
