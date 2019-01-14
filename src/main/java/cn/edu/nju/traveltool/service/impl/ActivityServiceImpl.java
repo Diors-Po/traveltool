@@ -87,9 +87,16 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public void joinActivity(JoinActivityVO joinActivityVO) {
-        ActivityWithUser activityWithUser = activityWithUserWrapper.unwrapper(joinActivityVO);
-        activityWithUserRepository.save(activityWithUser);
+    public void modifyUserActivity(JoinActivityVO joinActivityVO, ActivityWithUser.Status status) {
+        ActivityWithUser activityWithUser = activityWithUserRepository.findFirstByActivityIdAndUserId(joinActivityVO.getActivityId(),joinActivityVO.getUserId());
+
+        if(activityWithUser == null){
+            activityWithUser = activityWithUserWrapper.unwrapper(joinActivityVO,status);
+            activityWithUserRepository.save(activityWithUser);
+        }else{
+            activityWithUser = activityWithUserWrapper.unwrapper(activityWithUser,joinActivityVO,status);
+            activityWithUserRepository.save(activityWithUser);
+        }
     }
 
     @Override

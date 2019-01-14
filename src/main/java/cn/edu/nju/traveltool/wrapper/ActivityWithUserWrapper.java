@@ -36,9 +36,16 @@ public class ActivityWithUserWrapper {
         return activityWithUser;
     }
 
-    public ActivityWithUser unwrapper(JoinActivityVO joinActivityVO){
+    public ActivityWithUser unwrapper(JoinActivityVO joinActivityVO, ActivityWithUser.Status status){
         ActivityWithUser activityWithUser = new ActivityWithUser();
-        activityWithUser.setStatus(ActivityWithUser.Status.PREMEMBER);
+        return setActivityWithUser(activityWithUser, joinActivityVO, status);
+    }
+    public ActivityWithUser unwrapper(ActivityWithUser activityWithUser,JoinActivityVO joinActivityVO, ActivityWithUser.Status status){
+        return setActivityWithUser(activityWithUser, joinActivityVO, status);
+    }
+
+    private ActivityWithUser setActivityWithUser(ActivityWithUser activityWithUser, JoinActivityVO joinActivityVO, ActivityWithUser.Status status) {
+        activityWithUser.setStatus(status);
         activityWithUser.setUserId(joinActivityVO.getUserId());
         activityWithUser.setActivityId(joinActivityVO.getActivityId());
         activityWithUser.setReason(joinActivityVO.getReason());

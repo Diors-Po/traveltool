@@ -13,7 +13,6 @@ import cn.edu.nju.traveltool.entity.User;
 import cn.edu.nju.traveltool.service.ActivityService;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -67,8 +66,16 @@ public class ActivityController {
     }
 
     @PostMapping("join")
-    public ReponseMessage join(@RequestBody JoinActivityVO joinActivityVO){
-        activityService.joinActivity(joinActivityVO);
+    public ReponseMessage join(@CurrentUser User user,@RequestBody JoinActivityVO joinActivityVO){
+        joinActivityVO.setUserId(user.getId());
+        activityService.modifyUserActivity(joinActivityVO,ActivityWithUser.Status.PREMEMBER);
+        return ReponseMessage.OK;
+    }
+
+    @PostMapping("exit")
+    public ReponseMessage exit(@CurrentUser User user,@RequestBody JoinActivityVO joinActivityVO){
+        joinActivityVO.setUserId(user.getId());
+        activityService.modifyUserActivity(joinActivityVO, ActivityWithUser.Status.EXITMEMBER);
         return ReponseMessage.OK;
     }
 }
