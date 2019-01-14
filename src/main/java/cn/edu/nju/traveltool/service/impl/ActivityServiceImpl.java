@@ -82,6 +82,13 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public List<ActivityWithUserVO> listUsersByActivityId(User user, long activityId) {
+       List<ActivityWithUserVO> users = activityWithUserRepository.findActivityWithUserByActivityIdAndStatusIn(activityId, Lists.newArrayList(ActivityWithUser.Status.PREMEMBER))
+               .stream().map(x-> activityWithUserWrapper.wrapper2(x,userRepository.findById(x.getUserId()).get())).collect(Collectors.toList());
+        return users;
+    }
+
+    @Override
     public void closedActivity(ActivityVO activityVO) {
 
     }
@@ -100,6 +107,14 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public void modifyUserActivity(long activityId, long userId, ActivityWithUser.Status status) {
+        JoinActivityVO joinActivityVO = new JoinActivityVO();
+        joinActivityVO.setActivityId(activityId);
+        joinActivityVO.setUserId(userId);
+        modifyUserActivity(joinActivityVO,status);
+    }
+
+    @Override
     public ActivityInfoVO activityInfo(User user, long activityId) {
         List<NoticeVO> noticeVOList = noticeRepository.findByActivityIdAndUserId(activityId,user.getId(),new Sort(Sort.Direction.DESC,"id")).stream().map(x -> noticeWrapper.wrapper(x)).collect(Collectors.toList());
 
@@ -108,5 +123,11 @@ public class ActivityServiceImpl implements ActivityService {
         List<UserVO> userVOList = userRepository.findByIdIn(userIds).stream().map(x -> userWrapper.wrapper(x)).collect(Collectors.toList());
         Activity activity = activityRespository.findById(activityId).get();
         return activityWrapper.wrapper(noticeVOList,userVOList,activity);
+    }
+
+    @Override
+    public ActivityVO activityInfo(long activityId) {
+        Activity activity = activityRespository.findById(activityId).get();
+        return activityWrapper.wrapper(activity);
     }
 }
