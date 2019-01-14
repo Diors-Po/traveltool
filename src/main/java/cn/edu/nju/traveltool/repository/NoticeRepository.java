@@ -14,4 +14,5 @@ import java.util.List;
  **/
 public interface  NoticeRepository extends PagingAndSortingRepository<Notice,Long> {
     List<Notice> findByActivityIdAndUserId(long activityId,long userId, Sort sort);
+    List<Notice> findByActivityId(long activityId,Sort sort);
 }
