@@ -14,6 +14,7 @@ public class ActivityWithUserVO {
     private long userId;
     private ActivityWithUser.Status status;
     private long activityId;
+    private String reason;
     private ActivityVO activityVO;
     private UserVO userVO;
 }
