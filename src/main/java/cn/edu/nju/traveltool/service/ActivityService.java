@@ -22,7 +22,7 @@ public interface ActivityService {
     List<ActivityWithUserVO> listActivity(User user, List<ActivityWithUser.Status> status);
     void closedActivity(ActivityVO activityVO);
 
-    void joinActivity(JoinActivityVO joinActivityVO);
+    void modifyUserActivity(JoinActivityVO joinActivityVO, ActivityWithUser.Status status);
 
     ActivityInfoVO activityInfo(User user,long activityId);
 }

@@ -18,4 +18,5 @@ import java.util.List;
 public interface ActivityWithUserRepository extends PagingAndSortingRepository<ActivityWithUser,Long> {
     List<ActivityWithUser> findAllByUserId(long userId, Sort sort);
     List<ActivityWithUser> findActivityWithUserByActivityIdAndStatusIn(long activityId, List<ActivityWithUser.Status> statuses);
+    ActivityWithUser findFirstByActivityIdAndUserId(long activityId,long userId);
 }
