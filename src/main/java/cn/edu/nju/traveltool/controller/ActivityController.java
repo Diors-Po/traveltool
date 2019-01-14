@@ -3,6 +3,7 @@ package cn.edu.nju.traveltool.controller;
 import cn.edu.nju.traveltool.annotation.CurrentUser;
 import cn.edu.nju.traveltool.annotation.LoginRequired;
 import cn.edu.nju.traveltool.constant.Constant;
+import cn.edu.nju.traveltool.controller.vo.ActivityInfoVO;
 import cn.edu.nju.traveltool.controller.vo.ActivityVO;
 import cn.edu.nju.traveltool.controller.vo.ActivityWithUserVO;
 import cn.edu.nju.traveltool.controller.vo.JoinActivityVO;
@@ -30,6 +31,13 @@ public class ActivityController {
     public ReponseMessage<Page<ActivityWithUserVO>> list(@CurrentUser User user, @PathVariable("page")int page, @PathVariable("size")int size){
         Page<ActivityWithUserVO>  activityVOPage = activityService.listActivity(page, size,user);
         return new ReponseMessage<>(Constant.OK,Constant.REQUEST_SUCCESS,activityVOPage);
+    }
+
+    @GetMapping("{activityId}/info")
+    public ReponseMessage<ActivityInfoVO> info(@CurrentUser User user,@PathVariable("activityId")long activityId){
+        ActivityInfoVO activityInfoVO = activityService.activityInfo(user,activityId);
+        return new ReponseMessage<>(Constant.OK,Constant.REQUEST_SUCCESS,activityInfoVO);
+
     }
     @PostMapping("save")
     public ReponseMessage save(@RequestBody ActivityVO activityVO){

@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.List;
+
 
 /**
  * @program: traveltool
@@ -14,4 +16,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  **/
 public interface ActivityWithUserRepository extends PagingAndSortingRepository<ActivityWithUser,Long> {
     Page<ActivityWithUser> findAllByUserId(long userId, Pageable pageable);
+    List<ActivityWithUser> findActivityWithUserByActivityIdAndStatusIn(long activityId, List<ActivityWithUser.Status> statuses);
 }
