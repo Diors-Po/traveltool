@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * @author: menduo
  * @create: 2019-01-12 22:03
  **/
-@Target({ElementType.METHOD})
+@Target({ElementType.METHOD,ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LoginRequired {
 }

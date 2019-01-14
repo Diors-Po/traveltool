@@ -1,19 +1,19 @@
 package cn.edu.nju.traveltool.controller.vo;
 
-import cn.edu.nju.traveltool.entity.ActivityWithUser;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @program: traveltool
  * @mail: menduo96@gmail.com
  * @author: menduo
- * @create: 2019-01-12 17:16
+ * @create: 2019-01-14 11:07
  **/
 @Data
-public class ActivityWithUserVO {
-    private long userId;
-    private ActivityWithUser.Status status;
-    private long activityId;
+public class ActivityListVO {
     private ActivityVO activityVO;
     private UserVO userVO;
+    private ActivityWithUserVO activityWithUserVO;
+
 }

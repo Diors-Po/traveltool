@@ -3,6 +3,8 @@ package cn.edu.nju.traveltool.repository;
 import cn.edu.nju.traveltool.entity.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.List;
+
 /**
  * @program: traveltool
  * @mail: menduo96@gmail.com
@@ -12,4 +14,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface UserRepository extends PagingAndSortingRepository<User,Long> {
     User findByEmail(String email);
     User findByEmailAndPwd(String email,String pwd);
+    List<User> findByIdIn(List<Long> id);
 }

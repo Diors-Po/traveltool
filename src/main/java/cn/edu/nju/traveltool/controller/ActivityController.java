@@ -1,9 +1,15 @@
 package cn.edu.nju.traveltool.controller;
 
+import cn.edu.nju.traveltool.annotation.CurrentUser;
+import cn.edu.nju.traveltool.annotation.LoginRequired;
 import cn.edu.nju.traveltool.constant.Constant;
+import cn.edu.nju.traveltool.controller.vo.ActivityInfoVO;
 import cn.edu.nju.traveltool.controller.vo.ActivityVO;
+import cn.edu.nju.traveltool.controller.vo.ActivityWithUserVO;
 import cn.edu.nju.traveltool.controller.vo.JoinActivityVO;
 import cn.edu.nju.traveltool.data.ReponseMessage;
+import cn.edu.nju.traveltool.entity.ActivityWithUser;
+import cn.edu.nju.traveltool.entity.User;
 import cn.edu.nju.traveltool.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,13 +23,21 @@ import org.springframework.web.bind.annotation.*;
  **/
 @RestController
 @RequestMapping("activity")
+@LoginRequired
 public class ActivityController {
     @Autowired
     private ActivityService activityService;
     @GetMapping("list/{page}/{size}")
-    public ReponseMessage<Page<ActivityVO>> list(@PathVariable("page")int page,@PathVariable("size")int size){
-        Page<ActivityVO>  activityVOPage = activityService.listActivity(page, size);
+    public ReponseMessage<Page<ActivityWithUserVO>> list(@CurrentUser User user, @PathVariable("page")int page, @PathVariable("size")int size){
+        Page<ActivityWithUserVO>  activityVOPage = activityService.listActivity(page, size,user);
         return new ReponseMessage<>(Constant.OK,Constant.REQUEST_SUCCESS,activityVOPage);
+    }
+
+    @GetMapping("{activityId}/info")
+    public ReponseMessage<ActivityInfoVO> info(@CurrentUser User user,@PathVariable("activityId")long activityId){
+        ActivityInfoVO activityInfoVO = activityService.activityInfo(user,activityId);
+        return new ReponseMessage<>(Constant.OK,Constant.REQUEST_SUCCESS,activityInfoVO);
+
     }
     @PostMapping("save")
     public ReponseMessage save(@RequestBody ActivityVO activityVO){
