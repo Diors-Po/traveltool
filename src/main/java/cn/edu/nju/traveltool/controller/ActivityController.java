@@ -40,7 +40,8 @@ public class ActivityController {
 
     }
     @PostMapping("save")
-    public ReponseMessage save(@RequestBody ActivityVO activityVO){
+    public ReponseMessage save(@CurrentUser User user,@RequestBody ActivityVO activityVO){
+        activityVO.setUserId(user.getId());
         activityService.insertActivity(activityVO);
         return ReponseMessage.OK;
     }
