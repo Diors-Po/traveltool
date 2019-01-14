@@ -24,9 +24,9 @@ public class Activity extends BaseEntity {
     @Column(name = "location")
     private String location;
     @Column(name = "start")
-    private Date start;
+    private String start;
     @Column(name = "end")
-    private Date end;
+    private String end;
     @Column(name = "total_count")
     private int totalCount;
     @Column(name = "has_enter_count")

@@ -17,8 +17,8 @@ public class ActivityVO {
     private String topic;
     private String description;
     private String location;
-    private Date start;
-    private Date end;
+    private String start;
+    private String end;
     private int totalCount;
     private int hasEnterCount;
 }
