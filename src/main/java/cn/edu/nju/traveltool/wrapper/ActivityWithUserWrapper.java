@@ -61,7 +61,7 @@ public class ActivityWithUserWrapper {
     public ActivityWithUserVO wrapper(ActivityWithUser activityWithUser, User user){
         ActivityWithUserVO activityWithUserVO = new ActivityWithUserVO();
         BeanUtils.copyProperties(activityWithUser,activityWithUserVO);
-        Activity activity = activityRespository.findById(activityWithUser.getActivityId()).get();
+        Activity activity = activityRespository.findById(activityWithUser.getActivityId()).orElse(new Activity());
         activityWithUserVO.setActivityVO(activityWrapper.wrapper(activity));
         activityWithUserVO.setUserVO(userWrapper.wrapper(user));
         return activityWithUserVO;
