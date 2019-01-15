@@ -5,8 +5,9 @@ import cn.edu.nju.traveltool.annotation.LoginRequired;
 import cn.edu.nju.traveltool.constant.Constant;
 import cn.edu.nju.traveltool.controller.vo.NoticeVO;
 import cn.edu.nju.traveltool.data.ReponseMessage;
-import cn.edu.nju.traveltool.entity.User;
+import cn.edu.nju.traveltool.data.UserDTO;
 import cn.edu.nju.traveltool.service.NoticeService;
+import cn.edu.nju.traveltool.wrapper.UserWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,8 @@ import java.util.List;
 public class NoticeController {
     @Autowired
     private NoticeService noticeService;
+    @Autowired
+    private UserWrapper userWrapper;
 
     @GetMapping("list/{activityId}")
     public ReponseMessage<List<NoticeVO>> list(@PathVariable("activityId")long activityId) {
@@ -31,8 +34,8 @@ public class NoticeController {
     }
 
     @PostMapping("save")
-    public ReponseMessage save(@CurrentUser User user,@RequestBody NoticeVO noticeVO){
-        noticeService.saveNotice(noticeVO,user);
+    public ReponseMessage save(@CurrentUser UserDTO user, @RequestBody NoticeVO noticeVO){
+        noticeService.saveNotice(noticeVO,userWrapper.unwrapperFromDTO(user));
         return ReponseMessage.OK;
     }
 }

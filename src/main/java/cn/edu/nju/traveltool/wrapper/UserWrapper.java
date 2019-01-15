@@ -1,6 +1,7 @@
 package cn.edu.nju.traveltool.wrapper;
 
 import cn.edu.nju.traveltool.controller.vo.UserVO;
+import cn.edu.nju.traveltool.data.UserDTO;
 import cn.edu.nju.traveltool.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -31,4 +32,16 @@ public class UserWrapper {
         return u;
     }
 
+    public UserDTO wrapper2DTO(User user){
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user,userDTO);
+
+        return userDTO;
+    }
+
+    public User unwrapperFromDTO(UserDTO userDTO){
+        User user = new User();
+        BeanUtils.copyProperties(userDTO,user);
+        return user;
+    }
 }
