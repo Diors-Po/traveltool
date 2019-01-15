@@ -2,8 +2,6 @@ package cn.edu.nju.traveltool.controller.vo;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @program: traveltool
  * @mail: menduo96@gmail.com

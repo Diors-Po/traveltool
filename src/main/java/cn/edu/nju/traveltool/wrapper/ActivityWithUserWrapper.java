@@ -1,13 +1,11 @@
 package cn.edu.nju.traveltool.wrapper;
 
-import cn.edu.nju.traveltool.controller.vo.ActivityListVO;
 import cn.edu.nju.traveltool.controller.vo.ActivityWithUserVO;
 import cn.edu.nju.traveltool.controller.vo.JoinActivityVO;
 import cn.edu.nju.traveltool.entity.Activity;
 import cn.edu.nju.traveltool.entity.ActivityWithUser;
 import cn.edu.nju.traveltool.entity.User;
 import cn.edu.nju.traveltool.repository.ActivityRespository;
-import cn.edu.nju.traveltool.service.ActivityService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

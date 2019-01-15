@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class NoticeWrapper {
-    public Notice unwrapper(NoticeVO NoticeVO) {
-        Notice Notice = new Notice();
-        BeanUtils.copyProperties(NoticeVO,Notice);
-        return Notice;
+    public Notice unwrapper(NoticeVO noticeVO) {
+        Notice notice = new Notice();
+        BeanUtils.copyProperties(noticeVO,notice);
+        return notice;
     }
 
-    public NoticeVO wrapper(Notice Notice) {
-        NoticeVO NoticeVO = new NoticeVO();
-        BeanUtils.copyProperties(Notice,NoticeVO);
-        return NoticeVO;
+    public NoticeVO wrapper(Notice notice) {
+        NoticeVO noticeVO = new NoticeVO();
+        BeanUtils.copyProperties(notice,noticeVO);
+        return noticeVO;
     }
 }

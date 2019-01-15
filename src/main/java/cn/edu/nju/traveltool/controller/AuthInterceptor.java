@@ -1,20 +1,14 @@
 package cn.edu.nju.traveltool.controller;
 
 import cn.edu.nju.traveltool.annotation.LoginRequired;
-import cn.edu.nju.traveltool.constant.Constant;
 import cn.edu.nju.traveltool.controller.exception.AuthException;
-import cn.edu.nju.traveltool.controller.exception.LoginException;
-import cn.edu.nju.traveltool.data.ReponseMessage;
 import cn.edu.nju.traveltool.entity.User;
-import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @program: traveltool

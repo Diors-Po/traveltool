@@ -3,13 +3,15 @@ package cn.edu.nju.traveltool.controller;
 import cn.edu.nju.traveltool.annotation.CurrentUser;
 import cn.edu.nju.traveltool.annotation.LoginRequired;
 import cn.edu.nju.traveltool.constant.Constant;
-import cn.edu.nju.traveltool.controller.vo.*;
+import cn.edu.nju.traveltool.controller.vo.ActivityInfoVO;
+import cn.edu.nju.traveltool.controller.vo.ActivityVO;
+import cn.edu.nju.traveltool.controller.vo.ActivityWithUserVO;
+import cn.edu.nju.traveltool.controller.vo.JoinActivityVO;
 import cn.edu.nju.traveltool.data.ReponseMessage;
 import cn.edu.nju.traveltool.entity.ActivityWithUser;
 import cn.edu.nju.traveltool.entity.User;
 import cn.edu.nju.traveltool.service.ActivityService;
 import com.google.common.collect.Lists;
-import jdk.nashorn.internal.runtime.regexp.joni.ApplyCaseFoldArg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
