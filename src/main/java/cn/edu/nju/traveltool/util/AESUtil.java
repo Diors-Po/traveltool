@@ -17,6 +17,10 @@ import java.security.SecureRandom;
  **/
 @Slf4j
 public class AESUtil {
+
+    private AESUtil() {
+        throw new IllegalStateException("Utility class");
+    }
     public static String ecodes(String content, String key) {
         if (content == null || content.length() < 1) {
             return null;
@@ -27,7 +31,7 @@ public class AESUtil {
             byte[] byteContent = content.getBytes(StandardCharsets.UTF_8);
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
             byte[] byteRresult = cipher.doFinal(byteContent);
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < byteRresult.length; i++) {
                 String hex = Integer.toHexString(byteRresult[i] & 0xFF);
                 if (hex.length() == 1) {
@@ -70,7 +74,7 @@ public class AESUtil {
         return null;
     }
 
-    private static SecretKeySpec genSecretKeySpec(String key) throws NoSuchAlgorithmException, NoSuchPaddingException{
+    private static SecretKeySpec genSecretKeySpec(String key) throws NoSuchAlgorithmException{
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
         SecureRandom random=SecureRandom.getInstance("SHA1PRNG");
         random.setSeed(key.getBytes());
