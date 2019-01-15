@@ -2,7 +2,7 @@ package cn.edu.nju.traveltool.controller;
 
 import cn.edu.nju.traveltool.annotation.LoginRequired;
 import cn.edu.nju.traveltool.controller.exception.AuthException;
-import cn.edu.nju.traveltool.entity.User;
+import cn.edu.nju.traveltool.data.UserDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -34,7 +34,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             }
             //需要验证session是否有相应的权限
             if(loginRequired!=null){
-                User u = (User)request.getSession().getAttribute("user");
+                UserDTO u = (UserDTO)request.getSession().getAttribute("user");
                 if(u==null) return false;
             }
         }

@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
         if (u==null)
             throw new PwdErrorException();
         if(httpSession.getAttribute("user") == null){
-            httpSession.setAttribute("user",u);
+            httpSession.setAttribute("user",userWrapper.wrapper2DTO(u));
         }
         return new ReponseMessage<>(Constant.OK,Constant.REQUEST_SUCCESS,userWrapper.wrapper(u));
     }
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
         u = userRepository.save(u);
         //注册过程后也相当于登录了
-        httpSession.setAttribute("user",u);
+        httpSession.setAttribute("user",userWrapper.wrapper2DTO(u));
 
         return new ReponseMessage<>(Constant.OK,Constant.REQUEST_SUCCESS,userWrapper.wrapper(u));
     }

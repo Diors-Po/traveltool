@@ -1,7 +1,7 @@
 package cn.edu.nju.traveltool.controller;
 
 import cn.edu.nju.traveltool.annotation.CurrentUser;
-import cn.edu.nju.traveltool.entity.User;
+import cn.edu.nju.traveltool.data.UserDTO;
 import cn.edu.nju.traveltool.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -26,14 +26,14 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
     private UserRepository userRepository;
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-       return parameter.getParameterType().isAssignableFrom(User.class) && parameter.hasParameterAnnotation(CurrentUser.class);
+       return parameter.getParameterType().isAssignableFrom(UserDTO.class) && parameter.hasParameterAnnotation(CurrentUser.class);
     }
 
 
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-        User user = (User)webRequest.getAttribute("user", RequestAttributes.SCOPE_SESSION);
+        UserDTO user = (UserDTO)webRequest.getAttribute("user", RequestAttributes.SCOPE_SESSION);
         if (user != null)
             return user;
         throw new MissingServletRequestPartException("user");
