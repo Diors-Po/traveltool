@@ -121,7 +121,7 @@ public class ActivityServiceImpl implements ActivityService {
         List<Long> userIds = activityWithUserRepository.findActivityWithUserByActivityIdAndStatusIn(activityId, Lists.newArrayList(ActivityWithUser.Status.OWNER,ActivityWithUser.Status.PREMEMBER))
                 .stream().map(ActivityWithUser::getUserId).collect(Collectors.toList());
         List<UserVO> userVOList = userRepository.findByIdIn(userIds).stream().map(x -> userWrapper.wrapper(x)).collect(Collectors.toList());
-        Activity activity = activityRespository.findById(activityId).get();
+        Activity activity = activityRespository.findById(activityId).orElse(new Activity());
         return activityWrapper.wrapper(noticeVOList,userVOList,activity);
     }
 
