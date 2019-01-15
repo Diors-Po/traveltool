@@ -1,8 +1,6 @@
 package cn.edu.nju.traveltool.repository;
 
 import cn.edu.nju.traveltool.entity.ActivityWithUser;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
