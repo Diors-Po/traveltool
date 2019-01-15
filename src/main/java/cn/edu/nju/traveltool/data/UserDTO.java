@@ -2,6 +2,7 @@ package cn.edu.nju.traveltool.data;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,8 @@ import java.util.Date;
  * @create: 2019-01-15 14:11
  **/
 @Data
-public class UserDTO {
+public class UserDTO implements Serializable {
+
     private long id;
     private Date createdDate;
     private Date lastModifiedDate;
