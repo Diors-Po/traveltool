@@ -67,8 +67,7 @@ public class ActivityServiceImpl implements ActivityService {
     public List<ActivityWithUserVO> listActivity(User user) {
 
         List<ActivityWithUser> activityWithUsers = activityWithUserRepository.findAllByUserId(user.getId(),new Sort(Sort.Direction.DESC,"id"));
-        List<ActivityWithUserVO>  activityWithUserVOS = activityWithUsers.stream().map(x -> activityWithUserWrapper.wrapper(x,user)).collect(Collectors.toList());
-        return activityWithUserVOS;
+        return activityWithUsers.stream().map(x -> activityWithUserWrapper.wrapper(x,user)).collect(Collectors.toList());
     }
 
     @Override
@@ -83,14 +82,13 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public List<ActivityWithUserVO> listUsersByActivityId(User user, long activityId) {
-       List<ActivityWithUserVO> users = activityWithUserRepository.findActivityWithUserByActivityIdAndStatusIn(activityId, Lists.newArrayList(ActivityWithUser.Status.PREMEMBER))
-               .stream().map(x-> activityWithUserWrapper.wrapper2(x,userRepository.findById(x.getUserId()).orElse(new User()))).collect(Collectors.toList());
-        return users;
+        return activityWithUserRepository.findActivityWithUserByActivityIdAndStatusIn(activityId, Lists.newArrayList(ActivityWithUser.Status.PREMEMBER))
+                .stream().map(x-> activityWithUserWrapper.wrapper2(x,userRepository.findById(x.getUserId()).orElse(new User()))).collect(Collectors.toList());
     }
 
     @Override
     public void closedActivity(ActivityVO activityVO) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
