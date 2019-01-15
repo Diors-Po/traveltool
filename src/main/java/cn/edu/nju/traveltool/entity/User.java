@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @program: traveltool
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "user")
-public class User extends BaseEntity{
+public class User extends BaseEntity implements Serializable {
     @Column(name = "email")
     private String email;
     @Column(name = "pwd")

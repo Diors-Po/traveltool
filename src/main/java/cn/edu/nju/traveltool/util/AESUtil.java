@@ -1,11 +1,9 @@
 package cn.edu.nju.traveltool.util;
 
-import cn.edu.nju.traveltool.controller.vo.UserVO;
-import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -17,6 +15,7 @@ import java.security.SecureRandom;
  * @author: menduo
  * @create: 2019-01-11 23:03
  **/
+@Slf4j
 public class AESUtil {
     public static String ecodes(String content, String key) {
         if (content == null || content.length() < 1) {
@@ -42,7 +41,7 @@ public class AESUtil {
                 NoSuchPaddingException |
                 InvalidKeyException |
                 IllegalBlockSizeException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
         return null;
     }
@@ -66,7 +65,7 @@ public class AESUtil {
             byte[] result = cipher.doFinal(byteRresult);
             return new String(result);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
         return null;
     }
@@ -81,15 +80,4 @@ public class AESUtil {
         return new SecretKeySpec(enCodeFormat, "AES");
 
     }
-
-    public static void main(String[] args) {
-        Gson gson = new Gson();
-        UserVO userVO = new UserVO();
-        userVO.setEmail("hello@mooctest.net");
-        userVO.setUser("你好");
-        String x = gson.toJson(userVO);
-        System.out.println(ecodes(x,"happy-bird"));
-        System.out.println(dcodes("E9AAF3339DA7C0D34A6053C08E3B3713753632EDD6590221DDBA0360E5D744BA9D0F037453947185502B38B7BE14E681","happy-bird"));
-    }
-
 }

@@ -84,7 +84,7 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public List<ActivityWithUserVO> listUsersByActivityId(User user, long activityId) {
        List<ActivityWithUserVO> users = activityWithUserRepository.findActivityWithUserByActivityIdAndStatusIn(activityId, Lists.newArrayList(ActivityWithUser.Status.PREMEMBER))
-               .stream().map(x-> activityWithUserWrapper.wrapper2(x,userRepository.findById(x.getUserId()).get())).collect(Collectors.toList());
+               .stream().map(x-> activityWithUserWrapper.wrapper2(x,userRepository.findById(x.getUserId()).orElse(new User()))).collect(Collectors.toList());
         return users;
     }
 
@@ -127,7 +127,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public ActivityVO activityInfo(long activityId) {
-        Activity activity = activityRespository.findById(activityId).get();
+        Activity activity = activityRespository.findById(activityId).orElse(new Activity());
         return activityWrapper.wrapper(activity);
     }
 }
