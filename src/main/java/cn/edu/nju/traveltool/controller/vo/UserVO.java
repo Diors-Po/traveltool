@@ -1,5 +1,6 @@
 package cn.edu.nju.traveltool.controller.vo;
 
+import cn.edu.nju.traveltool.entity.ActivityWithUser;
 import lombok.Data;
 
 /**
@@ -14,4 +15,5 @@ public class UserVO {
     private String email;
     private String pwd;
     private String user;
+    private ActivityWithUser.Status role;
 }

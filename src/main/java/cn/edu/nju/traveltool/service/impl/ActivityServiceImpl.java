@@ -117,10 +117,10 @@ public class ActivityServiceImpl implements ActivityService {
         List<NoticeVO> noticeVOList = noticeRepository.findByActivityIdAndUserId(activityId,user.getId(),new Sort(Sort.Direction.DESC,"id")).stream().map(x -> noticeWrapper.wrapper(x)).collect(Collectors.toList());
         List<Long> userIds = activityWithUserRepository.findActivityWithUserByActivityIdAndStatusIn(activityId, Lists.newArrayList(ActivityWithUser.Status.OWNER,ActivityWithUser.Status.PREMEMBER))
                 .stream().map(ActivityWithUser::getUserId).collect(Collectors.toList());
-        List<UserVO> userVOList = userRepository.findByIdIn(userIds).stream().map(x -> userWrapper.wrapper(x)).collect(Collectors.toList());
+        List<UserVO> userVOList = userRepository.findByIdIn(userIds).stream().map(x -> userWrapper.wrapperWithRole(x,activityId)).collect(Collectors.toList());
 
         Activity activity = activityRespository.findById(activityId).orElse(new Activity());
-        return activityWrapper.wrapper(noticeVOList,userVOList,activity,user);
+        return activityWrapper.wrapper(noticeVOList,userVOList,activity);
     }
 
     @Override

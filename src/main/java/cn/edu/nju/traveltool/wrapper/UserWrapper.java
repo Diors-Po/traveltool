@@ -2,8 +2,11 @@ package cn.edu.nju.traveltool.wrapper;
 
 import cn.edu.nju.traveltool.controller.vo.UserVO;
 import cn.edu.nju.traveltool.data.UserDTO;
+import cn.edu.nju.traveltool.entity.ActivityWithUser;
 import cn.edu.nju.traveltool.entity.User;
+import cn.edu.nju.traveltool.repository.ActivityWithUserRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -15,6 +18,8 @@ import org.springframework.util.DigestUtils;
  **/
 @Service
 public class UserWrapper {
+    @Autowired
+    private ActivityWithUserRepository activityWithUserRepository;
 
     public User unwrapper(UserVO userVO){
         User u = new User();
@@ -29,6 +34,16 @@ public class UserWrapper {
         BeanUtils.copyProperties(user,u);
         u.setPwd("******");
         u.setUser(user.getNickname());
+        return u;
+    }
+
+    public UserVO wrapperWithRole(User user,long activityId){
+        ActivityWithUser activityWithUser = activityWithUserRepository.findFirstByActivityIdAndUserId(activityId,user.getId());
+        UserVO u = new UserVO();
+        BeanUtils.copyProperties(user,u);
+        u.setPwd("******");
+        u.setUser(user.getNickname());
+        u.setRole(activityWithUser.getStatus());
         return u;
     }
 
