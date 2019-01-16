@@ -13,6 +13,7 @@ import java.util.List;
 @Data
 public class ActivityInfoVO {
     ActivityVO activityVO;
+    UserVO userVO; //活动拥有者
     List<UserVO> userVOList; //所有参与者
     List<NoticeVO> noticeVOList;
 }
