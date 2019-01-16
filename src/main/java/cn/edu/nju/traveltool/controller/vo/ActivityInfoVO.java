@@ -12,7 +12,8 @@ import java.util.List;
  **/
 @Data
 public class ActivityInfoVO {
-    ActivityVO activityVO;
-    List<UserVO> userVOList; //所有参与者
-    List<NoticeVO> noticeVOList;
+    private ActivityVO activityVO;
+    private UserVO userVO;
+    private List<UserVO> userVOList; //所有参与者
+    private List<NoticeVO> noticeVOList;
 }

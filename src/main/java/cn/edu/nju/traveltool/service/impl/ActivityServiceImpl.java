@@ -120,7 +120,7 @@ public class ActivityServiceImpl implements ActivityService {
         List<UserVO> userVOList = userRepository.findByIdIn(userIds).stream().map(x -> userWrapper.wrapperWithRole(x,activityId)).collect(Collectors.toList());
 
         Activity activity = activityRespository.findById(activityId).orElse(new Activity());
-        return activityWrapper.wrapper(noticeVOList,userVOList,activity);
+        return activityWrapper.wrapper(noticeVOList,userVOList,activity,user);
     }
 
     @Override
