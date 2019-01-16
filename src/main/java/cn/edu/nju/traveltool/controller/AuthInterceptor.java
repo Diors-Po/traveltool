@@ -20,11 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String origin = request.getHeader("Origin");
-        response.setHeader("Access-Control-Allow-Origin", origin);
-        response.setHeader("Access-Control-Allow-Methods", "*");
-        response.setHeader("Access-Control-Allow-Headers","*");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
+//        String origin = request.getHeader("Origin");
+//        response.setHeader("Access-Control-Allow-Origin", origin);
+//        response.setHeader("Access-Control-Allow-Methods", "*");
+//        response.setHeader("Access-Control-Allow-Headers","*");
+//        response.setHeader("Access-Control-Allow-Credentials", "true");
         if (hasLoginRequired(handler,request))
             return true;
         throw new AuthException();
