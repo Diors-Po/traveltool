@@ -33,9 +33,7 @@ public class UserServiceImpl implements UserService {
         u = userRepository.findByEmailAndPwd(u.getEmail(),u.getPwd());
         if (u==null)
             throw new PwdErrorException();
-        if(httpSession.getAttribute("user") == null){
-            httpSession.setAttribute("user",userWrapper.wrapper2DTO(u));
-        }
+        httpSession.setAttribute("user",userWrapper.wrapper2DTO(u));
         return new ReponseMessage<>(Constant.OK,Constant.REQUEST_SUCCESS,userWrapper.wrapper(u));
     }
 
