@@ -44,4 +44,12 @@ public class UserController {
 
         return userService.info(userWrapper.unwrapperFromDTO(user));
     }
+
+    @GetMapping("logout")
+    public ReponseMessage logout(HttpSession httpSession){
+        if(httpSession.getAttribute("user")!=null){
+            httpSession.removeAttribute("user");
+        }
+        return ReponseMessage.OK;
+    }
 }
