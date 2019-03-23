@@ -14,4 +14,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface ActivityRespository extends PagingAndSortingRepository<Activity,Long> {
     Page<Activity> findByClosed(int closed,Pageable pageable);
     Activity findById(int id);
+
 }

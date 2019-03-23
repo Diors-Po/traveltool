@@ -87,10 +87,16 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public void closedActivity(ActivityVO activityVO) {
-        throw new UnsupportedOperationException();
+    public boolean closedActivity(long userId,long activityId) {
+        ActivityWithUser activityWithUser = activityWithUserRepository.findFirstByActivityIdAndUserId(activityId,userId);
+        if(activityWithUser.getStatus() == ActivityWithUser.Status.OWNER) {
+            Activity activity = activityRespository.findById(activityId).get();
+            activity.setClosed(1);
+            activityRespository.save(activity);
+            return true;
+        }
+        return false;
     }
-
     @Override
     public void modifyUserActivity(JoinActivityVO joinActivityVO, ActivityWithUser.Status status) {
         ActivityWithUser activityWithUser = activityWithUserRepository.findFirstByActivityIdAndUserId(joinActivityVO.getActivityId(),joinActivityVO.getUserId());

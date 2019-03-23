@@ -89,6 +89,15 @@ public class ActivityController {
         return ReponseMessage.OK;
     }
 
+    @PostMapping("close/{activityId}")
+    public ReponseMessage close(@CurrentUser UserDTO user,@PathVariable("activityId")long activityId) {
+        boolean flag = activityService.closedActivity(user.getId(),activityId);
+        if(flag)
+            return ReponseMessage.OK;
+        else
+            return new ReponseMessage(Constant.FAIL,Constant.REQUEST_FAIL);
+    }
+
     @PostMapping("agree/{activityId}/{userId}")
     public ReponseMessage agree(@PathVariable("activityId")long activityId,@PathVariable("userId")long userId){
         activityService.modifyUserActivity(activityId,userId, ActivityWithUser.Status.MEMBER);

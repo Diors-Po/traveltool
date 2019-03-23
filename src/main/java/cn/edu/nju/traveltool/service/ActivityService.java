@@ -23,7 +23,7 @@ public interface ActivityService {
     List<ActivityWithUserVO> listActivity(User user, ActivityWithUser.Status status);
     List<ActivityWithUserVO> listActivity(User user, List<ActivityWithUser.Status> status);
     List<ActivityWithUserVO> listUsersByActivityId(User user,long activityId);
-    void closedActivity(ActivityVO activityVO);
+    boolean closedActivity(long userId,long activityId);
 
     void modifyUserActivity(JoinActivityVO joinActivityVO, ActivityWithUser.Status status);
     void modifyUserActivity(long activityId,long userId,ActivityWithUser.Status status);
