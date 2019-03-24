@@ -15,4 +15,5 @@ import java.util.List;
 public interface TopicRepository extends PagingAndSortingRepository<Topic,Long> {
     List<Topic> findByActivityIdAndUserId(long activityId, long userId, Sort sort);
     List<Topic> findByActivityId(long activityId, Sort sort);
+    Topic findByIdAndUserId(long id,long userId);
 }

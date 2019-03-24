@@ -39,4 +39,11 @@ public class TopicController {
         topicService.saveTopic(topicVO,userWrapper.unwrapperFromDTO(user));
         return ReponseMessage.OK;
     }
+
+    @PostMapping("delete/{id}")
+    public ReponseMessage delete(@CurrentUser UserDTO user,@PathVariable("id")long id){
+        int flag = topicService.deleteTopic(id,user.getId());
+        if(flag==-1) return new ReponseMessage(Constant.FAIL,Constant.NOT_FOUND_DELETE_MSG);
+        return ReponseMessage.OK;
+    }
 }

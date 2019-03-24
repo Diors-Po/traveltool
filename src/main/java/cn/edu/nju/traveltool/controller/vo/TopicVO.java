@@ -11,6 +11,7 @@ import lombok.Data;
  **/
 @Data
 public class TopicVO {
+    private long id;
     private long activityId;
     private String info;
     private long userId;

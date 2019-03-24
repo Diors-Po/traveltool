@@ -15,4 +15,5 @@ import java.util.List;
 public interface TopicService {
     List<TopicWithUserVO> getTopicList(long activityId);
     void saveTopic(TopicVO topicVO, User user);
+    int deleteTopic(long id,long userId);
 }

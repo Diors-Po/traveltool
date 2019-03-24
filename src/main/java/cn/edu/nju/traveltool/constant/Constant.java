@@ -19,6 +19,7 @@ public class Constant {
     public static final String USER_REGISTER_FAIL = "用户注册失败";
     public static final String AUTH_FAIL = "用户未登录";
 
+    public static final String NOT_FOUND_DELETE_MSG = "只能删除自己的记录~";
 
     private Constant() {
         throw new IllegalStateException("Utility class");
