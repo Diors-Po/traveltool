@@ -90,7 +90,7 @@ public class ActivityServiceImpl implements ActivityService {
     public boolean closedActivity(long userId,long activityId) {
         ActivityWithUser activityWithUser = activityWithUserRepository.findFirstByActivityIdAndUserId(activityId,userId);
         if(activityWithUser.getStatus() == ActivityWithUser.Status.OWNER) {
-            Activity activity = activityRespository.findById(activityId).get();
+            Activity activity = activityRespository.findById(activityId).orElseThrow(NullPointerException::new);
             activity.setClosed(1);
             activityRespository.save(activity);
             return true;
